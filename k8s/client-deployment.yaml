@@ -17,3 +17,7 @@ spec:
           image: stephengrider/multi-client
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "250m"

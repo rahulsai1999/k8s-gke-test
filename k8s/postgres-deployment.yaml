@@ -31,3 +31,7 @@ spec:
                 secretKeyRef:
                   name: pgpassword
                   key: PGPASSWORD
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "250m"

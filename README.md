@@ -1,5 +1,7 @@
 ## K8s GKE Testing
 
+[![Build Status](https://travis-ci.com/rahulsai1999/k8s-gke-test.svg?branch=master)](https://travis-ci.com/rahulsai1999/k8s-gke-test)
+
 ### To deploy on local environment
 
 ```
