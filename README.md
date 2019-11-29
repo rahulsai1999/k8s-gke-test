@@ -36,7 +36,7 @@ gem install travis
 
 travis login
 
-travis encrypt-file service-account.json
+travis encrypt-file service-acc.json -r rahulsai1999/k8s-gke-test
 
 ```
 
