@@ -14,7 +14,7 @@ before_install:
   - gcloud auth activate-service-account --key-file service-acc.json
   - gcloud container clusters get-credentials your-first-cluster-1 --zone us-central1-a --project fir-ex2-717b2
   - echo "$docpass" | docker login -u "$docid" --password-stdin
-  - docker build -t noneuser2183/react-test -f ./client/Dockerfile.dev
+  - docker build -t noneuser2183/react-test -f ./client/Dockerfile.dev ./client
 script:
   - docker run noneuser2183/react-test npm test -- --coverage
 deploy:
