@@ -34,9 +34,9 @@ docker run -it -v ${pwd}:/app ruby:latest sh
 gem install travis --no-rdoc --no-ri
 gem install travis
 
-travis login
+travis login --pro
 
-travis encrypt-file service-acc.json -r rahulsai1999/k8s-gke-test
+travis encrypt-file --pro service-acc.json --add
 
 ```
 
