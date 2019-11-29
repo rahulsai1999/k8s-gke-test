@@ -13,7 +13,7 @@ kubectl apply -f ./k8s
 - logs in to docker cli
 - build the test version of the image and run tests
 - if tests are successful run the deploy section
-- build, tag and push images to Docker Hub
+- build, tag and push images to Docker Hub (using Git SHA)
 - Apply all the config on the k8s folder
 - imperatively set latest image on deployment
 
@@ -29,7 +29,7 @@ kubectl apply -f ./k8s
 * Copy the service-account.json file to the current working directory before proceeding
 
 ```
-docker run -it -v ${pwd}:/app ruby:alpine sh
+docker run -it -v ${pwd}:/app ruby:latest sh
 
 gem install travis --no-rdoc --no-ri
 gem install travis
@@ -38,4 +38,22 @@ travis login
 
 travis encrypt-file service-account.json
 
+```
+
+### Gcloud Config - IMP
+
+- Set secret for the Postgres password
+```
+kubectl create secret generic pgpassword --from-literal PGPASSWORD=mypgpass123
+```
+- Create RBAC permissions first
+```
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account tiller --upgrade
+```
+- Use helm to install the packages
+
+```
+helm install stable/nginx-ingress --name my-nginx --set rbac.create=true
 ```
