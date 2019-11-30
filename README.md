@@ -39,8 +39,9 @@ gem install travis
 travis login --pro
 
 travis encrypt-file --pro service-acc.json --add
-
 ```
+
+Delete the service-acc.json file from the directory 
 
 ### Gcloud Config - IMP
 
@@ -59,3 +60,34 @@ helm init --service-account tiller --upgrade
 ```
 helm install stable/nginx-ingress --name my-nginx --set rbac.create=true
 ```
+
+### HTTPS setup
+
+Manual Process
+
+- The entrypoint domain sends a request to Let's Encrpyt to get a certificate
+- Let's Encrypt sends the request to a random route of the server and gets a reply
+- The certificate is provided for 90 days
+
+Automatic Process
+
+- Inside cloud shell
+
+```
+kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
+
+kubectl create namespace cert-manager
+
+helm repo add jetstack https://charts.jetstack.io
+
+helm repo update
+
+helm install \
+  --name cert-manager \
+  --namespace cert-manager \
+  --version v0.12.0 \
+  jetstack/cert-manager
+```
+
+- Create an issuer file similar to a k8s config inside the k8s directory
+- Create an certificate file similar to a k8s config inside the k8s directory

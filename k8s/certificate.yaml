@@ -1,0 +1,20 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: rahulsai-live-tls
+spec:
+  secretName: rahulsai-live
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: rahulsai.live
+  dnsNames:
+    - rahulsai.live
+    - www.rahulsai.live
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - rahulsai.live
+          - www.rahulsai.live
