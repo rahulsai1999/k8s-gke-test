@@ -89,5 +89,5 @@ helm install \
   jetstack/cert-manager
 ```
 
-- Create an issuer file similar to a k8s config inside the k8s directory
-- Create an certificate file similar to a k8s config inside the k8s directory
+- Create an issuer file similar to a k8s config inside the k8s directory.
+- Create an certificate file similar to a k8s config inside the k8s directory.
